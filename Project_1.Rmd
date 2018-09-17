@@ -91,7 +91,7 @@ orig_mean <- sapply(swiss, mean)
 filtered_mean <- swiss %>%
   filter(Infant.Mortality <=20)%>%
   sapply(mean)
-orig_mean - filtered_mean
+kable(orig_mean - filtered_mean)
 ```
 
 In future analysis, it would be interesting to see if there are any statistically significant relationships between variables for these populations. I would run linear regressions to possibly find the best predictors for which communities would have the lowest infant mortality rates and possibly be able to find causes for mortality in these factors for communities.
@@ -131,7 +131,7 @@ mean(USJudgeRatings$CONT)
 
 Looking at the following plot (excluded for space) `rpairs(USJudgeRatings, main = "USJudgeRatings data")` the only variable pairs that deviate from the general positive relationship are those including number of contacts with the judge. I think it'll be interesting to look how the relationship holds when the lawyers have more interactions with the judges. I'll look at the same plots again after filtering out the bottom 50% of the data (based on number of contacts of lawyer with judge)
 
-```{r}
+```{r, warning=F}
 filtered_judge <- USJudgeRatings %>%
   mutate(highcontact = ifelse(CONT>=7.5, 1,0))
 
