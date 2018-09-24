@@ -24,7 +24,9 @@ plot1 <- ChickWeight %>%
   group_by(Chick)%>%
   ggplot(aes(Time, weight, col=as.factor(Chick)))+
   geom_line()+
-  ggtitle("Time v. Weight for each Chick")
+  ggtitle("Days Since Birth v. Weight for each Chick")+
+  xlab("Days since Birth")+
+  ylab("Weight (gm)")
 
 ggplotly(plot1)
 ```
@@ -38,7 +40,9 @@ chicks1 <- ChickWeight%>%
   mutate(big = ifelse(as.numeric(end_weight)>=200, 1,0))%>%
   ggplot(aes(Time, weight, col=as.factor(Chick)))+
   geom_line(aes(linetype=as.factor(big)))+
-  labs(main = "Time v. Weight for each Chick", subtitle = "Separated by big/small via end weight")
+  ggtitle("Days since Birth v. Weight for each Chick, Separated by big/small via end weight")+
+  xlab("Days since Birth")+
+  ylab("Weight (gm)")
 
 ggplotly(chicks1)
 ```
@@ -54,7 +58,8 @@ as.tibble(Titanic)%>%
   arrange(Class, Age)%>%
   ggplot(aes(x=Class, y=n))+
   geom_col(mapping=aes(fill=Survived))+
-  ggtitle("Counts of Titanic Passenger Survival by Class")
+  ggtitle("Counts of Titanic Passenger Survival by Class")+
+  ylab("Passenger Count")
 ```
 
 From here, I thought it would be interesting to look at the proportion of all of the passengers who did not survive, what classes were they from? 
@@ -103,19 +108,27 @@ The US Judge Rating dataset includes 47 ratings by lawyers of state judges in th
 ```{r, warning=F}
 p1 <- ggplot(data=USJudgeRatings, aes(x=DMNR, y=INTG))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Demeanor")+
+  ylab("Integrity")
 
 p2 <- ggplot(data=USJudgeRatings, aes(x=DECI, y=INTG))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Prompt Decisions")+
+  ylab("Integrity")
 
 p3 <- ggplot(data=USJudgeRatings, aes(x=PREP, y=INTG))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Preparation for Trial")+
+  ylab("Integrity")
 
 p4 <- ggplot(data=USJudgeRatings, aes(x=ORAL, y=INTG))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Sound Oral Rulings")+
+  ylab("Integrity")
 
 grid.arrange(p1, p2, p3, p4, ncol=2)
   
@@ -123,7 +136,7 @@ grid.arrange(p1, p2, p3, p4, ncol=2)
 ggplot(data=USJudgeRatings, aes(x=CONT))+
   geom_histogram(binwidth=.5)+
   geom_vline(xintercept =7.5)+
-  labs(main = "Proportion of Lawyer Contact with Judges per Judge")
+  labs(main = "Proportion of Lawyer Contact with Judges per Judge", xlab="Number of Contacts")
   
 median(USJudgeRatings$CONT)
 mean(USJudgeRatings$CONT)
@@ -137,19 +150,28 @@ filtered_judge <- USJudgeRatings %>%
 
 p1 <- ggplot(data=filtered_judge, aes(x=DMNR, y=INTG, col=highcontact))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Demeanor")+
+  ylab("Integrity")
 
 p2 <- ggplot(data=filtered_judge, aes(x=DECI, y=INTG, col=highcontact))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Prompt Decisions")+
+  ylab("Integrity")
 
 p3 <- ggplot(data=filtered_judge, aes(x=PREP, y=INTG, col=highcontact))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Preparation for Trial")+
+  ylab("Integrity")
 
 p4 <- ggplot(data=filtered_judge, aes(x=ORAL, y=INTG, col=highcontact))+
   geom_point()+
-  geom_smooth()
+  geom_smooth()+
+  xlab("Sound Oral Rulings")+
+  ylab("Integrity")
+
 
 grid.arrange(p1, p2, p3, p4, ncol=2)
 ```
